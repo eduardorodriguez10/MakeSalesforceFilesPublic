@@ -1,0 +1,50 @@
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
+<!--  If necessary, please modify the charset parameter to specify the        -->
+<!--  character set of your HTML page.                                        -->
+<!--  ----------------------------------------------------------------------  -->
+
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <FORM> element to your page.             -->
+<!--  ----------------------------------------------------------------------  -->
+
+<form action="https://cs17.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+
+<input type=hidden name="orgid" value="00Dg0000006HhXB">
+<input type=hidden name="retURL" value="http://dallascityhall.com/government/Pages/contact_mcc.aspx">
+
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+<!--  these lines if you wish to test in debug mode.                          -->
+<!--  <input type="hidden" name="debug" value=1>                              -->
+<!--  <input type="hidden" name="debugEmail"                                  -->
+<!--  value="eduardo@ventasconsulting.com">                                   -->
+<!--  ----------------------------------------------------------------------  -->
+
+<label for="name">Contact Name</label><input  id="name" maxlength="80" name="name" size="20" type="text" /><br>
+
+<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
+
+<label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
+
+<label for="subject">Subject</label><input  id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
+
+<label for="description">Description</label><textarea name="description"></textarea><br>
+
+Address:<input  id="00Ng0000001rKu9" maxlength="255" name="00Ng0000001rKu9" size="20" type="text" /><br>
+
+City:<input  id="00Ng0000001rKtp" maxlength="100" name="00Ng0000001rKtp" size="20" type="text" /><br>
+
+State:<input  id="00Ng0000001rKtz" maxlength="100" name="00Ng0000001rKtz" size="20" type="text" /><br>
+
+Zipcode:<input  id="00Ng0000001rKu4" maxlength="10" name="00Ng0000001rKu4" size="20" type="text" /><br>
+
+<input type="hidden" value="D01" id="00Ng0000001rKsS" maxlength="3" name="00Ng0000001rKsS" size="20" type="text" /><br>
+
+<div style="display:none"><select id="recordType" name="recordType"><option value="012g00000005Ile" selected>MCC Contact Form</option></select><br></div>
+
+<input type="submit" name="submit">
+
+</form>
