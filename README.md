@@ -1,8 +1,9 @@
-# share-salesforcefiles
+# share-salesforcefilesA
 
 This application can be used to automatically share Salesforce Files that are related to records. It creates a content distribution record to make the file publicly available using an URL. 
 
 How it works
+------------
 
 1. When a file is uploaded as a Salesforce file related to a record in Salesforce, the app checks the Shared_Files_Setting__mdt to see if the SObject has been configured to publicly share these files. 
 2. If public sharing has been configured, it creates a Shared_File__c record with the RelatedRecordId__c of the related record. In the Shared_Files_Setting__mdt custom metadata record you can use the Automatically_Share__c field to automatically make these files publicly available. If you don't select these boxes, the user has the option to later share these files by using the Lightning Component in the Record Page.
