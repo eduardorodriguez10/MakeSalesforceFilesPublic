@@ -19,11 +19,7 @@ Dependencies
 
 Configuration
 -------------
-1. Create a Shared_Files_Setting__mdt record for each SObject that will contain attachments that you wish to share. 
-
-In the ObjectName__c enter the SObject Name, such as ‘Account’ or ‘Project__c’. 
-If you want these files to be automatically shared when the attachment is uploaded, check the Automatically_Share__c checkbox. 
-The Used_For_Testing_Only__c checkbox is used to create phantom records that are only accessible during unit testing, leave this checkbox uncheck. 
+1. Create a Shared_Files_Setting__mdt record for each SObject that will contain attachments that you wish to share. In the ObjectName__c enter the SObject Name, such as ‘Account’ or ‘Project__c’. If you want these files to be automatically shared when the attachment is uploaded, check the Automatically_Share__c checkbox. The Used_For_Testing_Only__c checkbox is used to create phantom records that are only accessible during unit testing, leave this checkbox uncheck. 
 
 2. Add the DisplaySharedFilesInRecordPage Lightning Component to the Lightning Record Page of the SObject that will contain attachments that you wish to share. 
 
