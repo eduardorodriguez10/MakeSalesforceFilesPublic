@@ -32,42 +32,6 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides><fields>
-        <fullName>ContentDistributionId__c</fullName>
-        <description>Id of the Content Distribution</description>
-        <externalId>false</externalId>
-        <inlineHelpText>Id of the Content Distribution</inlineHelpText>
-        <label>ContentDistributionId</label>
-        <length>20</length>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields><fields>
-        <fullName>ContentDocumentId__c</fullName>
-        <description>Id of the Content Document</description>
-        <externalId>false</externalId>
-        <inlineHelpText>Id of the Content Document</inlineHelpText>
-        <label>ContentDocumentId</label>
-        <length>20</length>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields><fields>
-        <fullName>ContentVersionId__c</fullName>
-        <description>Id of the Content Version</description>
-        <externalId>false</externalId>
-        <inlineHelpText>Id of the Content Vresion</inlineHelpText>
-        <label>ContentVersionId</label>
-        <length>20</length>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields><fields>
         <fullName>Description__c</fullName>
         <description>Description of the Document</description>
         <externalId>false</externalId>
@@ -124,9 +88,45 @@
         <type>Text</type>
         <unique>false</unique>
     </fields><fields>
+        <fullName>ContentDistributionId__c</fullName>
+        <description>Id of the Content Distribution</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Id of the Content Distribution</inlineHelpText>
+        <label>ContentDistributionId</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields><fields>
+        <fullName>ContentDocumentId__c</fullName>
+        <description>Id of the Content Document</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Id of the Content Document</inlineHelpText>
+        <label>ContentDocumentId</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields><fields>
+        <fullName>ContentVersionId__c</fullName>
+        <description>Id of the Content Version</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Id of the Content Vresion</inlineHelpText>
+        <label>ContentVersionId</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields><fields>
         <fullName>RelatedRecordId__c</fullName>
         <description>Record If of the Related SObject</description>
-        <externalId>false</externalId>
+        <externalId>true</externalId>
         <inlineHelpText>Record If of the Related SObject</inlineHelpText>
         <label>RelatedRecordId</label>
         <length>20</length>

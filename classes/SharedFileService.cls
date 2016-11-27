@@ -30,9 +30,11 @@ public class SharedFileService {
         {
             Map<String,List<ContentVersion>> mapSObjectNameToListVersions = SharedFileUtils.getSObjectNameToVersionsMap(theVersions, sObjectNames); 
             Map<Id,ContentDocumentLink> mapDocIdToCDLink = SharedFileUtils.getDocIdToContentDocumentLinksMap(documentToVersionIdsOfLatestVersionsMap.keySet(), sObjectNames); 
-            
             List<Shared_File__c> sharedFilesBuilt = new List<Shared_File__c>(); 
+            
+            // First check if versions currently have Shared_File__c records
             List<Shared_File__c> existingFiles = [SELECT Id, Display_In_Public_Site__c, ContentVersionId__c, ContentDocumentId__c, File_Name__c, File_Type__c, RelatedRecordId__c, Description__c FROM Shared_File__c WHERE ContentDocumentId__c IN: mapDocIdToCDLink.keySet()];
+            
             Map<Id,Shared_File__c> mapDocIdToSharedFile = new Map<Id,Shared_File__c>();
             for(Shared_File__c existingFile: existingFiles)
             {
@@ -44,8 +46,10 @@ public class SharedFileService {
                 List<ContentVersion> contentVersions = mapSObjectNameToListVersions.get(objectName);
                 for(ContentVersion cv: contentVersions)
                 {
+                    // Get the Existign Shared_File__c record or Create Onw
                     Shared_File__c sharedFile = mapDocIdToSharedFile.get(cv.ContentDocumentId);
                     if(sharedFile == null) sharedFile = new Shared_File__c(); 
+                    // Update Properties
                     sharedFile.Display_In_Public_Site__c = sharedFileSettings.get(objectName).Automatically_Share__c; 
                     sharedFile.ContentVersionId__c = cv.Id; 
                     sharedfile.ContentDocumentId__c = cv.ContentDocumentId;
