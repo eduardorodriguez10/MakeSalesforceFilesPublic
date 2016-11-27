@@ -15,11 +15,11 @@ Dependencies
 ------------
 
 1. The application uses some classes from https://github.com/DouglasCAyers/sfdc-convert-attachments-to-chatter-files from Douglas C Ayers to convert Attachments to Salesforce Files, which simplifies the Unit Testing. These classes requires Enhanced Notes enabled in the Salesforce Org. 
-
+2. MyDomain is enabled for the Org.
 
 Configuration
 -------------
-1. Create a Shared_Files_Setting__mdt record for each SObject that will contain attachments that you wish to share. In the ObjectName__c enter the SObject Name, such as ‘Account’ or ‘Project__c’. If you want these files to be shared automatically when the attachment is uploaded, check the Automatically_Share__c checkbox. The Used_For_Testing_Only__c checkbox is used to create phantom records that are only accessible during unit testing, leave this checkbox uncheck. 
+1. Create a Shared_Files_Setting__mdt record for each SObject that will contain attachments that you wish to share. In the ObjectName__c enter the SObject Name, such as ‘Account’ or ‘Project__c’. If you want these files to be shared automatically when the attachment is uploaded, check the Automatically_Share__c checkbox. The Used_For_Testing_Only__c checkbox is used to create phantom records that are only accessible during unit testing, leave this checkbox uncheck. You may need to add the Automatically_Share__c field to the Page Layout of the Custom Metadata Type.
 
 2. Add the DisplaySharedFilesInRecordPage Lightning Component to the Lightning Record Page of the SObject that will contain attachments that you wish to share. 
 
