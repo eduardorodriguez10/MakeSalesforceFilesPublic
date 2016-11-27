@@ -23,7 +23,7 @@ Configuration
 
 2. Add the DisplaySharedFilesInRecordPage Lightning Component to the Lightning Record Page of the SObject that will contain attachments that you wish to share. 
 
-3. Upload an attachment to the record
+3. Upload an attachment to the record of the type of the SObject that was entered in the Shared_Files_Setting__mdt custom metadata record.
 4. Click Refresh in the Lightning Component 
 5. Click View in the Link Column to See the Publicly Available URL 
 6. To display these records in a Salesforce Site, query the records with the following information: 
