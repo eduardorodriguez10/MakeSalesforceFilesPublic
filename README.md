@@ -4,9 +4,9 @@ This application can be used to automatically share Salesforce Files that are re
 
 How it works
 
-1. When a file is uploaded as an attachment to a record in Salesforce, the app checks in the Shared_Files_Setting__mdt to see if the SObject has been configured to share attachments
-2. If it has been configured, it creates a Shared_File__c record with the RelatedRecordId__c of the SObject and a checkbox called Display_In_Public_Site__c with the value of the Automatically_Share__c checkbox of the Shared_Files_Setting__mdt. 
-3. A trigger on the Shared_File__c object will create a Content Distribution for the file if the Display_In_Public_Site__c checkbox is checked and it will store the URL in the Download_Link__c URL field. 
+1. When a file is uploaded as a Salesforce file related to a record in Salesforce, the app checks the Shared_Files_Setting__mdt to see if the SObject has been configured to publicly share these files. 
+2. If public sharing has been configured, it creates a Shared_File__c record with the RelatedRecordId__c of the related record. In the Shared_Files_Setting__mdt custom metadata record you can use the Automatically_Share__c field to automatically make these files publicly available. If you don't select these boxes, the user has the option to later share these files by using the Lightning Component in the Record Page.
+3. A trigger on the Shared_File__c object will create a Content Distribution for the file and it will store the URL in the Download_Link__c URL field of the Shared_File__c record.
 4. A Lightning Component is used to update these settings, remove sharing, update descriptions, etc. 
 
 Dependencies
