@@ -1,5 +1,4 @@
 ({
-    
      getSharedFiles: function(component) {
         var action = component.get("c.returnRelatedSharedFiles");
         action.setParams({
@@ -7,11 +6,10 @@
         });
         action.setCallback(this, function(a) {
             // display the product to the chrome dev console (for fun)
-            console.log(a.getReturnValue());
             component.set("v.sharedFiles", a.getReturnValue());
         });
         $A.enqueueAction(action);
-    }, 
+    },
     updateSharedFiles: function(component){
         var action = component.get("c.updatedSharedFiles");
         action.setParams({
@@ -20,7 +18,6 @@
         });
         action.setCallback(this, function(a) {
             // display the product to the chrome dev console (for fun)
-            console.log(a.getReturnValue());
             component.set("v.sharedFiles", a.getReturnValue());
         });
         $A.enqueueAction(action);
@@ -32,7 +29,6 @@
         });
         action.setCallback(this, function(a) {
             // display the product to the chrome dev console (for fun)
-            console.log(a.getReturnValue());
             component.set("v.hasAccess", a.getReturnValue());
         });
         $A.enqueueAction(action);
@@ -43,14 +39,14 @@
         var spinner = component.find('spinner');
         var evt = spinner.get("e.toggle");
         evt.setParams({ isVisible : true });
-        evt.fire(); 
-    }, 
+        evt.fire();
+    },
     hideSpinner: function(component) {
         var cmpTarget = component.find('theTable');
         $A.util.removeClass(cmpTarget, 'hideForSpinner');
         var spinner = component.find('spinner');
         var evt = spinner.get("e.toggle");
         evt.setParams({ isVisible : false });
-        evt.fire(); 
+        evt.fire();
     }
 })
