@@ -36,5 +36,21 @@
             component.set("v.hasAccess", a.getReturnValue());
         });
         $A.enqueueAction(action);
+    },
+    showSpinner: function(component) {
+        var cmpTarget = component.find('theTable');
+        $A.util.addClass(cmpTarget, 'hideForSpinner');
+        var spinner = component.find('spinner');
+        var evt = spinner.get("e.toggle");
+        evt.setParams({ isVisible : true });
+        evt.fire(); 
+    }, 
+    hideSpinner: function(component) {
+        var cmpTarget = component.find('theTable');
+        $A.util.removeClass(cmpTarget, 'hideForSpinner');
+        var spinner = component.find('spinner');
+        var evt = spinner.get("e.toggle");
+        evt.setParams({ isVisible : false });
+        evt.fire(); 
     }
 })
