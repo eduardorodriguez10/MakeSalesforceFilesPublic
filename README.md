@@ -7,7 +7,7 @@ How it works
 ------------
 
 1. When a Salesforce File is uploaded and it is related to a record in Salesforce, the app checks the Shared_Files_Setting__mdt Metadata Type to see if the related SObject has been configured to publicly share these files. 
-2. If public sharing has been configured, the app creates a Shared_File__c and stores the record Id of the related record in the RelatedRecordId__c field of the Share_File__c record. In the Shared_Files_Setting__mdt custom metadata record, you can specify if you want these files to be shared automatically using the Automatically_Share__c field. If this field is not selected, the user has the option to later share these files using the Lightning Component in the Record Page.
+2. If a Shared_Files_Setting__mdt record exists for the related SObject, the app creates a Shared_File__c and stores the record Id of the related record in the RelatedRecordId__c field of the Share_File__c record. In the Shared_Files_Setting__mdt custom metadata record, you can specify if you want these files to be shared automatically using the Automatically_Share__c field. If this field is not selected, the user has the option to later share these files using the Lightning Component in the Record Page.
 3. The files are shared by a trigger on the Shared_File__c object that creates ContentDistribution records for the files and stores the URL in the Download_Link__c URL field of the Shared_File__c record.
 4. A Lightning Component is used to update these settings, remove sharing, update descriptions, etc. 
 
