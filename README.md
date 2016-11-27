@@ -6,16 +6,15 @@ This application can be used to automatically share Salesforce Files that are re
 How it works
 ------------
 
-1. When a file is uploaded as a Salesforce file related to a record in Salesforce, the app checks the Shared_Files_Setting__mdt to see if the SObject has been configured to publicly share these files. 
-2. If public sharing has been configured, it creates a Shared_File__c record with the RelatedRecordId__c of the related record. In the Shared_Files_Setting__mdt custom metadata record you can use the Automatically_Share__c field to automatically make these files publicly available. If you don't select these boxes, the user has the option to later share these files by using the Lightning Component in the Record Page.
-3. A trigger on the Shared_File__c object will create a Content Distribution for the file and it will store the URL in the Download_Link__c URL field of the Shared_File__c record.
+1. When a Salesforce File is uploaded and it is related to a record in Salesforce, the app checks the Shared_Files_Setting__mdt Metadata Type to see if the related SObject has been configured to publicly share these files. 
+2. If public sharing has been configured, the app creates a Shared_File__c and stores the record Id of the related record in the RelatedRecordId__c field of the Share_File__c record. In the Shared_Files_Setting__mdt custom metadata record, you can specify if you want these files to be shared automatically using the Automatically_Share__c field. If this field is not selected, the user has the option to later share these files using the Lightning Component in the Record Page.
+3. The files are shared by a trigger on the Shared_File__c object that creates ContentDistribution records for the files and stores the URL in the Download_Link__c URL field of the Shared_File__c record.
 4. A Lightning Component is used to update these settings, remove sharing, update descriptions, etc. 
 
 Dependencies
 ------------
 
 1. The application uses some classes from https://github.com/DouglasCAyers/sfdc-convert-attachments-to-chatter-files from Douglas C Ayers to convert Attachments to Salesforce Files, which simplifies the Unit Testing. These classes requires Enhanced Notes enabled in the Salesforce Org. 
-
 
 
 Configuration
