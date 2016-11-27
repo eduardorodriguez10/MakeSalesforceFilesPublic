@@ -1,0 +1,64 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global" controller="SharedFilesAuraController">
+     <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="sharedFiles" type="Object[]"/>
+    <aura:attribute name="hasAccess" type="Boolean"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<lightning:button variant="brand" label="Refresh" iconName="action:refresh" iconPosition="left" onclick="{! c.doInit }" />
+    <lightning:button variant="brand" label="Update Descriptions" iconName="utility:sync" iconPosition="left" onclick="{! c.updateRecords }" disabled="{!!v.hasAccess}"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <br/><br/>
+    <center><ui:spinner aura:id="spinner"/></center>
+        <div aura:id="theTable" class="container, hideForSpinner" >
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-5">
+                    <div class="well">
+                        <div class="btn-group btn-group-cart">
+                            <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                              <thead>
+                                <tr class="slds-text-title--caps">
+                                  <th scope="col" width="25%">
+                                    <div class="slds-truncate" title="File Name">File Name</div>
+                                  </th>
+                                  <th scope="col" width="25%">
+                                    <div class="slds-truncate" title="File Type">File Type</div>
+                                  </th>
+                                  <th scope="col" width="25%">
+                                    <div class="slds-truncate" title="Download Link">Link</div>
+                                  </th>
+                                  <th scope="col" width="25%">
+                                    <div class="slds-truncate" title="Externally Shared">Shared</div>
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <aura:iteration items="{!v.sharedFiles}" var="p">
+                                    <tr>
+                                        <th scope="row" data-label="File Name">
+                                            <div class="slds-truncate" title="{!p.File_Name__c}">{!p.File_Name__c}</div>
+                                        </th>
+                                        <th scope="row" data-label="File Type">
+                                            <div class="slds-truncate" title="{!p.File_Type__c}">{!p.File_Type__c}</div>
+                                        </th>
+                                        <th scope="row" data-label="Download Link">
+                                            <div class="slds-truncate" title="View"><a href="{!p.Download_Link__c}" target="_blank">View</a></div>
+                                        </th>
+                                        <th scope="row" data-label="Externally Shared">
+                                            <div class="slds-truncate" title="{!p.Display_In_Public_Site__c}"><ui:inputCheckbox aura:id="checkbox" value="{!p.Display_In_Public_Site__c}" change="{! c.updateRecords }" disabled="{!!v.hasAccess}"/></div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" data-label="Description" colspan="4">
+                                            <div class="slds-truncate" title="{!p.Description__c}"><ui:inputText label="Description: " value="{!p.Description__c}" disabled="{!!v.hasAccess}"/></div>
+                                        </th>
+                                    </tr>
+                                </aura:iteration>
+                              </tbody>
+                           </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</aura:component>

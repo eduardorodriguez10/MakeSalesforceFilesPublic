@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata"><fields>
+        <fullName>Automatically_Share__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If selected, attachments will be automatically shared and a link will be stored in the Shared_File__c record</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>If selected, attachments will be automatically shared and a link will be stored in the Shared_File__c record</inlineHelpText>
+        <label>Automatically Share</label>
+        <type>Checkbox</type>
+    </fields><fields>
+        <fullName>ObjectName__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Name of the Object which attachments will be externally shared</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>Name of the Object which attachments will be externally shared</inlineHelpText>
+        <label>ObjectName</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields><fields>
+        <fullName>Used_For_Testing_Only__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If Selected, this setting will only share items for unit tests</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>If Selected, this setting will only share items for unit tests</inlineHelpText>
+        <label>Used For Testing Only</label>
+        <type>Checkbox</type>
+    </fields><description>Used to determine what files need to be shared externally</description><label>Shared Files Setting</label><pluralLabel>Shared Files Setting</pluralLabel><visibility>Public</visibility></CustomObject>

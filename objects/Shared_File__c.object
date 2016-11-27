@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata"><actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides><actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides><actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides><actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides><actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides><actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides><actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides><actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides><actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides><actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides><actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides><fields>
+        <fullName>ContentDistributionId__c</fullName>
+        <description>Id of the Content Distribution</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Id of the Content Distribution</inlineHelpText>
+        <label>ContentDistributionId</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields><fields>
+        <fullName>ContentDocumentId__c</fullName>
+        <description>Id of the Content Document</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Id of the Content Document</inlineHelpText>
+        <label>ContentDocumentId</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields><fields>
+        <fullName>ContentVersionId__c</fullName>
+        <description>Id of the Content Version</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Id of the Content Vresion</inlineHelpText>
+        <label>ContentVersionId</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields><fields>
+        <fullName>Description__c</fullName>
+        <description>Description of the Document</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Document</inlineHelpText>
+        <label>Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields><fields>
+        <fullName>Display_In_Public_Site__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Indicates if the file should be displayed in public site searches</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates if the file should be displayed in public site searches</inlineHelpText>
+        <label>Display In Public Site</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields><fields>
+        <fullName>Download_Link__c</fullName>
+        <description>Link to Download the File (Externally available)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Link to Download the File (Externally available)</inlineHelpText>
+        <label>Download Link</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields><fields>
+        <fullName>File_Name__c</fullName>
+        <description>Name of the file being shared</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of the file being shared</inlineHelpText>
+        <label>File Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields><fields>
+        <fullName>File_Type__c</fullName>
+        <description>Type of the File Uploaded</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Type of the File Uploaded</inlineHelpText>
+        <label>File Type</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields><fields>
+        <fullName>RelatedRecordId__c</fullName>
+        <description>Record If of the Related SObject</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Record If of the Related SObject</inlineHelpText>
+        <label>RelatedRecordId</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields><allowInChatterGroups>true</allowInChatterGroups><compactLayoutAssignment>SYSTEM</compactLayoutAssignment><deploymentStatus>Deployed</deploymentStatus><description>Contains Information about the Files being shared in Public Sites</description><enableActivities>false</enableActivities><enableBulkApi>true</enableBulkApi><enableFeeds>false</enableFeeds><enableHistory>true</enableHistory><enableReports>true</enableReports><enableSearch>true</enableSearch><enableSharing>true</enableSharing><enableStreamingApi>true</enableStreamingApi><label>Shared File</label><nameField>
+        <displayFormat>SHF-{00000000}</displayFormat>
+        <label>Shared File Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField><pluralLabel>Shared Files</pluralLabel><searchLayouts /><sharingModel>ReadWrite</sharingModel></CustomObject>
