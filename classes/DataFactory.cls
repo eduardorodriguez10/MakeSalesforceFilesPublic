@@ -9,7 +9,7 @@ public class DataFactory {
             Account vendor = new Account(); 
             vendor.Name = 'Vendor '+i;
             if(vendorRecordTypeId != null) vendor.put('RecordTypeId', vendorRecordTypeId);
-            vendor.Vendor_Id__c = 'V0000'+i;
+            //vendor.Vendor_Id__c = 'V0000'+i;
             vendorsToCreate.add(vendor);
         }
         if(!vendorsToCreate.isEmpty()) insert vendorsToCreate;
@@ -25,7 +25,7 @@ public class DataFactory {
             Account department = new Account(); 
             department.Name = 'Department '+i;
             if(deptRecordTypeId != null) department.put('RecordTypeId', deptRecordTypeId);
-            department.Department_Code__c = 'DE'+i;
+            //department.Department_Code__c = 'DE'+i;
             departmentsToCreate.add(department);
         }
         if(!departmentsToCreate.isEmpty()) insert departmentsToCreate;
