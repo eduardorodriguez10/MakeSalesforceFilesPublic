@@ -2,8 +2,10 @@ trigger onSharedFile on Shared_File__c (before insert, before update) {
     
     if(Trigger.isBefore && (Trigger.isInsert || Trigger.isUpdate))
     {
+        SharedFileService allSharedFiles = new SharedFileService(Trigger.new); 
+        
         // Mark items with errors if user doesn't have edit access to Related Record 
-        if(Trigger.isUpdate) ContentService.blockAccessIfRelatedNotEditable(Trigger.new);
+        allSharedFiles.blockAccessIfRelatedNotEditable();
         
         // If shared_file has the Display Publicly Checked, then create Custom Distribution
         // If shared_file has the Display Publicly Unchecked, delete the Custom Distribution 
@@ -28,8 +30,10 @@ trigger onSharedFile on Shared_File__c (before insert, before update) {
                     descriptionsToUpdate.put(sf.ContentVersionId__c, sf.Description__c);
                 }    
                 
+                // Get files that need to be unshared
                 if(sf.Display_In_Public_Site__c == false && oldValue == true) sharedFilesToUnshare.add(sf); 
                 
+                // Get files that need to have the description updated
                 oldDescription = oldSf.Description__c; 
                 if(oldDescription != sf.Description__c) descriptionsToUpdate.put(sf.ContentVersionId__c, sf.Description__c);
             }
@@ -41,47 +45,24 @@ trigger onSharedFile on Shared_File__c (before insert, before update) {
             }
         }
         
+        // Create Content Distributions and Update Shared_File__c Links
         if(sharedFilesToShare != null && !sharedFilesToShare.isEmpty())
         {
-            Set<Id> documentIds = new Set<Id>(); 
-            Map<Id,Id> documentIdToVersion = new Map<Id,Id>(); 
-            for(Shared_File__c sf: sharedFilesToShare)
-            {
-                documentIds.add(sf.ContentDocumentId__c); 
-                documentIdToVersion.put(sf.ContentDocumentId__c, sf.ContentVersionId__c); 
-            }
-            
-            // Create Content Distribution for the Files that need to be shared
-            List<ContentDistribution> contentDistributions = ContentService.createOrRetrieveContentDistribution(documentIds, documentIdToVersion); 
-            
-            Map<Id,ContentDistribution> mapDocIdToContentDistribution = new Map<Id,ContentDistribution>(); 
-            for(ContentDistribution cd: contentDistributions)
-            {
-                mapDocIdToContentDistribution.put(cd.ContentDocumentId, cd); 
-            }
-            
-            // Update the Download_Link__c field from the newly generated Content Distribution
-            for(Shared_File__c sf: sharedFilesToShare)
-            {
-                ContentDistribution thisCd =  mapDocIdToContentDistribution.get(sf.ContentDocumentId__c); 
-                sf.Download_Link__c = thisCd.DistributionPublicUrl;
-            }
+            SharedFileService filesToShare = new SharedFileService(sharedFilesToShare); 
+            filesToShare.createContentDistributions();
         }
         
+        // Remove Content Distributions and Update Shared_File__c Links
         if(sharedFilesToUnshare != null && !sharedFilesToUnshare.isEmpty())
         {
-            // Remove Content Distributions if user desired to unshare
-            Set<Id> documentIds = new Set<Id>(); 
-            for(Shared_File__c sf: sharedFilesToUnshare)
-            {
-                documentIds.add(sf.ContentDocumentId__c); 
-                sf.Download_Link__c = null; 
-            }
-            ContentService.deleteContentDistributions(documentIds);
+            SharedFileService filesToUnshare = new SharedFileService(sharedFilesToShare); 
+            filesToUnshare.removeDistributions();
         }
         
         // Update Descriptions as needed 
-        if(descriptionsToUpdate != null && !descriptionsToUpdate.isEmpty()) ContentService.updateContentDescriptions(descriptionsToUpdate);
-        
+        if(descriptionsToUpdate != null && !descriptionsToUpdate.isEmpty())
+        {
+            SharedFileUtils.updateContentDescriptions(descriptionsToUpdate);
+        }
     }
 }
