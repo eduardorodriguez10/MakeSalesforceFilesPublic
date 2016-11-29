@@ -1,4 +1,4 @@
-Automatically Share Salesforce Files
+Automatically Share Salesforce Files and make them publicly available
 ====================================
 
 This application can be used to automatically share Salesforce Files that are related to records. It creates a content distribution record to make the file publicly available using an URL. 
