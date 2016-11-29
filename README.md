@@ -21,7 +21,7 @@ Dependencies
 
 Installation
 -------------
-1. Confirm Enhanced Notes are enabled, Lightning Experience is enabled and MyDomain has been configured. 
+1. Confirm Enhanced Notes are enabled, Lightning Experience is enabled and MyDomain has been deployed. 
 2. Deploy from github. 
 3. Allow read/write access to all fields in the Shared_File__c custom object for the profile of the users that will be sharing the Salesforce files.
 
