@@ -49,7 +49,21 @@ public class ContentDistributions {
     
     public List<ContentDistribution> upsertContentDistributions()
     {
-        if(!this.theContentDistributions.isEmpty()) upsert this.theContentDistributions; 
+        if(this.theContentDistributions == null || this.theContentDistributions.isEmpty()) return null; 
+        
+        if(!this.theContentDistributions.isEmpty())
+        {
+            List<ContentDistribution> distributionsToInsert = new List<ContentDistribution>();
+            List<ContentDistribution> distributionsToUpdate = new List<ContentDistribution>();
+            for(ContentDistribution cd: this.theContentDistributions)
+            {
+                if(cd.Id == null) distributionsToInsert.add(cd); 
+                else distributionsToUpdate.add(cd); 
+            }
+            if(!distributionsToInsert.isEmpty()) insert distributionsToInsert; 
+            if(!distributionsToUpdate.isEmpty()) update distributionsToUpdate;
+        }
+        
         Map<Id,ContentDistribution> contentDistributionsMap = new Map<Id, ContentDistribution>(this.theContentDistributions);
         // update the Content Distributions with the newly generated URL
         this.theContentDistributions = [SELECT Id, ContentDocumentId, ContentVersionId, DistributionPublicUrl FROM ContentDistribution WHERE Id IN: contentDistributionsMap.keySet()];

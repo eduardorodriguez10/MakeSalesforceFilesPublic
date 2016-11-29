@@ -1,35 +1,16 @@
 public class DataFactory {
     
-    public static List<Account> createVendors(Integer pNumber)
+    public static List<Account> createAccounts(Integer pNumber)
     {
-        Id vendorRecordTypeId = ANM_Utils.getRecordTypeId('Account', 'Vendor'); 
-        List<Account> vendorsToCreate = new List<Account>(); 
+        List<Account> accountsToCreate = new List<Account>(); 
         for(Integer i = 0; i < pNumber; i++)
         {
-            Account vendor = new Account(); 
-            vendor.Name = 'Vendor '+i;
-            if(vendorRecordTypeId != null) vendor.put('RecordTypeId', vendorRecordTypeId);
-            //vendor.Vendor_Id__c = 'V0000'+i;
-            vendorsToCreate.add(vendor);
+            Account theAccount = new Account(); 
+            theAccount.Name = 'Account '+i;
+            accountsToCreate.add(theAccount);
         }
-        if(!vendorsToCreate.isEmpty()) insert vendorsToCreate;
-        return vendorsToCreate;
-    }
-    
-    public static List<Account> createDepartments(Integer pNumber)
-    {
-        Id deptRecordTypeId = ANM_Utils.getRecordTypeId('Account', 'Department'); 
-        List<Account> departmentsToCreate = new List<Account>(); 
-        for(Integer i = 0; i < pNumber; i++)
-        {
-            Account department = new Account(); 
-            department.Name = 'Department '+i;
-            if(deptRecordTypeId != null) department.put('RecordTypeId', deptRecordTypeId);
-            //department.Department_Code__c = 'DE'+i;
-            departmentsToCreate.add(department);
-        }
-        if(!departmentsToCreate.isEmpty()) insert departmentsToCreate;
-        return departmentsToCreate;
+        if(!accountsToCreate.isEmpty()) insert accountsToCreate;
+        return accountsToCreate;
     }
     
     public static List<Contact> createContacts(Integer pNumber, Id pAccountId)
