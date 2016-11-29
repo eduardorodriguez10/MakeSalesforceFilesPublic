@@ -73,4 +73,29 @@ public class SharedFilesTest {
         List<ContentDistribution> theNewDistributions = [SELECT Id FROM ContentDistribution]; 
         System.assertNotEquals(0, theNewDistributions.size());
     }
+    
+    @isTest
+    private static void should_update_descriptions()
+    {
+        List<Account> vendor = DataFactory.createAccounts(1); 
+        List<Contact> theContact = DataFactory.createContacts(1, vendor[0].Id);
+        Map<Id,Contact> contacsMap = new Map<Id,Contact>(theContact);
+        DataFactory.createFiles(1, contacsMap.keySet());
+        List<Shared_File__c> theSharedFiles = [SELECT Id, ContentDocumentId__c FROM Shared_File__c WHERE RelatedRecordId__c =: theContact[0].Id];
+        System.assertNotEquals(null, theSharedFiles);
+        System.assertNotEquals(0, theSharedFiles.size());
+        Set<Id> documentIds = new Set<Id>(); 
+        Map<Id,String> mapIdToDescription = new Map<Id,String>();
+        for(Shared_File__c sf: theSharedFiles)
+        {
+            documentIds.add(sf.ContentDocumentId__c);
+            mapIdToDescription.put(sf.ContentDocumentId__c, 'Test description');
+        }
+        SharedFileService.updateLatestVersionsDescriptions(mapIdToDescription);
+        List<ContentVersion> updatedVersions = [SELECT Id, Description, ContentDocumentId FROM ContentVersion WHERE ContentDocumentId IN: documentIds AND isLatest = true]; 
+        for(ContentVersion cv: updatedVersions)
+        {
+            System.assertEquals(cv.Description, 'Test description');
+        }
+    }
 }
