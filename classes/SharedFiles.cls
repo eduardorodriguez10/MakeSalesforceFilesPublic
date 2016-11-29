@@ -80,7 +80,8 @@ public class SharedFiles {
         }
         
         // Recreate Distributions for New Versions
-        ContentDistributions distributionsToRecreate = new ContentDistributions(documentIdToVersion); 
+        ContentDistributions distributionsToRecreate = new ContentDistributions(); 
+        distributionsToRecreate.createContentDistributions(documentIdToVersion); 
         
         // Insert Distributions
         List<ContentDistribution> contentDistributions = distributionsToRecreate.upsertContentDistributions(); 

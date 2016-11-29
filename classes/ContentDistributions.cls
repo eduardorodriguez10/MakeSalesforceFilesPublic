@@ -28,8 +28,7 @@ public class ContentDistributions {
         return this.theContentDistributions;
     }
     
-    // Used To Create New Content Distributions
-    public ContentDistributions(Map<Id,Id> pDocumentToVersionIdsOfLatestVersionsMap)
+    public List<ContentDistribution> createContentDistributions(Map<Id,Id> pDocumentToVersionIdsOfLatestVersionsMap)
     {
         this.contentDocumentIds = pDocumentToVersionIdsOfLatestVersionsMap.keySet();
         this.theContentDistributions = new List<ContentDistribution>();
@@ -45,6 +44,8 @@ public class ContentDistributions {
             // only insert it if it doesn't have a content distribution yet
             this.theContentDistributions.add(cd);
         }
+        
+        return this.theContentDistributions;
     }
     
     public List<ContentDistribution> upsertContentDistributions()
