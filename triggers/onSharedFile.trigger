@@ -2,67 +2,77 @@ trigger onSharedFile on Shared_File__c (before insert, before update) {
     
     if(Trigger.isBefore && (Trigger.isInsert || Trigger.isUpdate))
     {
-        SharedFileService allSharedFiles = new SharedFileService(Trigger.new); 
+        SharedFileService.addErrorsIfUserDoesnotHaveAccessToRelatedRecord(Trigger.new); 
+
         
-        // Mark items with errors if user doesn't have edit access to Related Record 
-        allSharedFiles.blockAccessIfRelatedNotEditable();
-        
-        // If shared_file has the Display Publicly Checked, then create Custom Distribution
-        // If shared_file has the Display Publicly Unchecked, delete the Custom Distribution 
-        // Update descriptions in the Document if Updated in the Shared_File__c record
-        List<Shared_File__c> sharedFilesToShare = new List<Shared_File__c>(); 
-        List<Shared_File__c> sharedFilesToUnshare = new List<Shared_File__c>(); 
-        Map<Id,String> descriptionsToUpdate = new Map<Id,String>(); 
-        
-        for(Shared_File__c sf: Trigger.new)
-        {
-            System.debug('Checking Shared File with Display = '+sf.Display_In_Public_Site__c);
-            Boolean oldValue; 
-            String oldDescription;
-            if(Trigger.isUpdate)
+        // --- (1) Collect the Shared_File__c records that need to be shared
+                // -- Display_In_Public_Site__c changed from false to true
+                // Collect the Shared_File__C records that need to be unshared
+                // -- Display_In_Public_Site__c changed from true to false
+                // Collect the Shared_File__c records that have updated descriptions
+                
+            List<Shared_File__c> sharedFilesToShare = new List<Shared_File__c>(); 
+            List<Shared_File__c> sharedFilesToUnshare = new List<Shared_File__c>(); 
+            Map<Id,String> descriptionsToUpdate = new Map<Id,String>(); 
+            
+            for(Shared_File__c sf: Trigger.new)
             {
-                // If Updated, check if the Display Setting or the Description Changed
-                Shared_File__c oldSf = Trigger.oldMap.get(sf.Id);
-                oldValue = oldSf.Display_In_Public_Site__c;
-                if(sf.Display_In_Public_Site__c == true && oldValue == false)
+                System.debug('Checking Shared File with Display = '+sf.Display_In_Public_Site__c);
+                Boolean oldValue; 
+                String oldDescription;
+                if(Trigger.isUpdate)
                 {
-                    sharedFilesToShare.add(sf);
-                    descriptionsToUpdate.put(sf.ContentVersionId__c, sf.Description__c);
-                }    
-                
-                // Get files that need to be unshared
-                if(sf.Display_In_Public_Site__c == false && oldValue == true) sharedFilesToUnshare.add(sf); 
-                
-                // Get files that need to have the description updated
-                oldDescription = oldSf.Description__c; 
-                if(oldDescription != sf.Description__c) descriptionsToUpdate.put(sf.ContentVersionId__c, sf.Description__c);
+                    // If Updated, check if the Display Setting or the Description Changed
+                    Shared_File__c oldSf = Trigger.oldMap.get(sf.Id);
+                    oldValue = oldSf.Display_In_Public_Site__c;
+                    if(sf.Display_In_Public_Site__c == true && oldValue == false)
+                    {
+                        sharedFilesToShare.add(sf);
+                        descriptionsToUpdate.put(sf.ContentDocumentId__c, sf.Description__c);
+                    }    
+                    
+                    // Get files that need to be unshared
+                    if(sf.Display_In_Public_Site__c == false && oldValue == true) sharedFilesToUnshare.add(sf); 
+                    
+                    // Get files that need to have the description updated
+                    oldDescription = oldSf.Description__c; 
+                    if(oldDescription != sf.Description__c) descriptionsToUpdate.put(sf.ContentDocumentId__c, sf.Description__c);
+                }
+                else
+                {
+                    // Always execute the sharing logic if Inserted
+                    if(sf.Display_In_Public_Site__c == true) sharedFilesToShare.add(sf);
+                    if(sf.Display_In_Public_Site__c == false ) sharedFilesToUnshare.add(sf); 
+                }
             }
-            else
+        // --- (1)
+        
+        
+        // --- (2) If any Shared_File__c records need to be created
+        // ---Create Content Distributions and Update Shared_File__c Links
+            if(sharedFilesToShare != null && !sharedFilesToShare.isEmpty())
             {
-                // Always execute the sharing logic if Inserted
-                if(sf.Display_In_Public_Site__c == true) sharedFilesToShare.add(sf);
-                if(sf.Display_In_Public_Site__c == false ) sharedFilesToUnshare.add(sf); 
+                SharedFileService.recreateDistributions(sharedFilesToShare); 
             }
-        }
+        // --- (2)
         
-        // Create Content Distributions and Update Shared_File__c Links
-        if(sharedFilesToShare != null && !sharedFilesToShare.isEmpty())
-        {
-            SharedFileService filesToShare = new SharedFileService(sharedFilesToShare); 
-            filesToShare.createContentDistributions();
-        }
-        
+        // (3) If any Shared_File__c records need to be unshared
         // Remove Content Distributions and Update Shared_File__c Links
-        if(sharedFilesToUnshare != null && !sharedFilesToUnshare.isEmpty())
-        {
-            SharedFileService filesToUnshare = new SharedFileService(sharedFilesToShare); 
-            filesToUnshare.removeDistributions();
-        }
+            if(sharedFilesToUnshare != null && !sharedFilesToUnshare.isEmpty())
+            {
+                System.debug('Unsharing Records: '+sharedFilesToUnshare);
+                SharedFileService.removeDistributions(sharedFilesToUnshare); 
+                
+            }
+        // --- (3)
         
-        // Update Descriptions as needed 
-        if(descriptionsToUpdate != null && !descriptionsToUpdate.isEmpty())
-        {
-            SharedFileUtils.updateContentDescriptions(descriptionsToUpdate);
-        }
+        // ---- (4) Update Descriptions as needed 
+            if(descriptionsToUpdate != null && !descriptionsToUpdate.isEmpty())
+            {
+                System.debug('Updating descriptions: '+descriptionsToUpdate);
+                SharedFileUtils.descriptionUpdatedOnSharedFile = true;
+                SharedFileService.updateLatestVersionsDescriptions(descriptionsToUpdate); 
+            }
+        // ---- 
     }
 }

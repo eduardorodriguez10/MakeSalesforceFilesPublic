@@ -1,5 +1,8 @@
 public class SharedFileUtils {
 	
+	public static Boolean descriptionUpdatedOnSharedFile = false; 
+	public static Boolean distributionDeletedBySharedFile = false;
+	
     // Returns a map of the ContentDocumentId to the LatestVersionId
     public static Map<Id,Id> getMapOfContentDocumentToLatestVersion(List<ContentVersion> docVersions)
     {
@@ -112,17 +115,6 @@ public class SharedFileUtils {
             sharedFilesSettingsMap.put(setting.ObjectName__c, setting);
         }
         return sharedFilesSettingsMap;
-    }
-    
-    // Updates the Description of the Version of the Docuemnents
-    public static void updateContentDescriptions(Map<Id,String> mapIdToDescription)
-    {
-        List<ContentVersion> theVersions = [SELECT Id, Description FROM ContentVersion WHERE Id IN: mapIdToDescription.keySet()]; 
-        for(ContentVersion cd: theVersions)
-        {
-            cd.Description = mapIdToDescription.get(cd.Id);
-        }
-        update theVersions;
     }
     
 }

@@ -2,12 +2,27 @@ trigger onContentVersion on ContentVersion (after insert, after update) {
 	
     if(Trigger.isAfter && (Trigger.isInsert || Trigger.isUpdate))
     {
-        // Share Content Records Publicly with a link if they are related to a Services_Contract__c record
-        // then get the URL Link and store it in a Shared_File__c record
+        ContentVersions updatedVersions = new ContentVersions(Trigger.new); 
         
-        SharedFileService sharedFilesToInsert = new SharedFileService(); 
-        sharedFilesToInsert.buildSharedFiles(Trigger.new); 
-        sharedFilesToInsert.insertSharedFilesWithAccess();
+        // ---- (1) If there are any existing Shared_File__c records, update the ContentVersionId__c field
+        // with the field Id of the new Version
+            List<Shared_File__c> existingSharedFilesRecords = updatedVersions.getExistingSharedFiles();
+            if(existingSharedFilesRecords != null && !existingSharedFilesRecords.isEmpty())
+            {
+                // Update Existing Shared_File__c with new VersionId
+                Map<Id,Id> documentToVersionIdsOfLatestVersionsMap = updatedVersions.getDocIdToContentVersionId();
+                SharedFileService.updateVersionIdInSharedFiles(existingSharedFilesRecords, documentToVersionIdsOfLatestVersionsMap); 
+            }
+        // ---- (1)
         
+        
+        // ---- (2) Check if any Shared_File__c records need to be created and create them
+            List<Shared_File__c> shareFilesToCreate = updatedVersions.getSharedFilesToCreate();
+            if(shareFilesToCreate != null && !shareFilesToCreate.isEmpty())
+            {
+                // Create New Shared_File__c for Versions that do not have one
+                SharedFileService.insertSharedFilesWithAccess(shareFilesToCreate);
+            }
+        // --- (2)
     }
 }
