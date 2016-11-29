@@ -36,7 +36,7 @@ Configuration
 ![screenshot](/component-image.jpg)
 5. Click View in the Link Column to See the Publicly Available URL 
 6. To display these records in a Salesforce Site, query the Shared_File__c records with the following information: 
-    1. RelatedRecordId__c -> the Id of the related record (linkedEntity) of the file (parent record) 
+    1. RelatedRecordId__c -> the Id of the related record (linkedEntity) of the file 
     2. File_Name__c -> name of the file
     3. Filey_Type__c -> type of file
     4. Description__c -> the description of the file
