@@ -1,7 +1,7 @@
 Automatically Share Salesforce Files and make them publicly available (Lightning Experience)
 ====================================
 
-This application can be used to automatically share Salesforce Files that are related to records. It creates a content distribution record to make the file publicly available using an URL. 
+This application can be used to automatically share (publicly) Salesforce Files in Lightning Experience. It makes the file publicly accessible through a URL and uses a lightning component to manage the sharing of the file.
 
 How it works
 ------------
