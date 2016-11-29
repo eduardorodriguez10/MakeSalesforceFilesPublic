@@ -33,7 +33,7 @@ Configuration
 
 3. Upload an attachment to the record of the type of the SObject that was entered in the Shared_Files_Setting__mdt custom metadata record.
 4. Click Refresh in the Lightning Component 
-![screenshot](/lightning-component.png)
+![screenshot](/component-image.jpg)
 5. Click View in the Link Column to See the Publicly Available URL 
 6. To display these records in a Salesforce Site, query the Shared_File__c records with the following information: 
     1. RelatedRecordId__c -> the Id of the related record (linkedEntity) of the file (parent record) 
