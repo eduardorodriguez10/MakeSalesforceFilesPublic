@@ -6,7 +6,7 @@ This application can be used to automatically share Salesforce Files that are re
 How it works
 ------------
 
-1. When a Salesforce File is uploaded and it is related to a record in Salesforce, the app checks the Shared_Files_Setting__mdt Metadata Type to see if the related SObject has been configured to publicly share these files. 
+1. When a Salesforce File is uploaded as an "attachment" to a record in Salesforce, the app checks the Shared_Files_Setting__mdt Metadata Type to see if the related SObject has been configured to publicly share these files. 
 2. If a Shared_Files_Setting__mdt record exists for the related SObject, the app creates a Shared_File__c and stores the record Id of the related record in the RelatedRecordId__c field of the Share_File__c record. In the Shared_Files_Setting__mdt custom metadata record, you can specify if you want these files to be shared automatically using the Automatically_Share__c field. If this field is not selected, the user has the option to later share these files using the Lightning Component in the Record Page.
 3. The files are shared by a trigger on the Shared_File__c object that creates ContentDistribution records for the files and stores the URL in the Download_Link__c URL field of the Shared_File__c record.
 4. A Lightning Component is used to update these settings, remove sharing, update descriptions, etc. 
@@ -34,8 +34,8 @@ Configuration
 4. Click Refresh in the Lightning Component 
 ![screenshot](/lightning-component.png)
 5. Click View in the Link Column to See the Publicly Available URL 
-6. To display these records in a Salesforce Site, query the records with the following information: 
-    1. RelatedRecordId__c -> the Id of the linkedEntity of the attachment (parent record) 
+6. To display these records in a Salesforce Site, query the Shared_File__c records with the following information: 
+    1. RelatedRecordId__c -> the Id of the related record (linkedEntity) of the file (parent record) 
     2. File_Name__c -> name of the file
     3. Filey_Type__c -> type of file
     4. Description__c -> the description of the file
