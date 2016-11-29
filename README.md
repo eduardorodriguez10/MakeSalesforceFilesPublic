@@ -16,7 +16,7 @@ Dependencies
 ------------
 
 1. The application uses some classes from https://github.com/DouglasCAyers/sfdc-convert-attachments-to-chatter-files from Douglas C Ayers to convert Attachments to Salesforce Files, which simplifies the Unit Testing. These classes requires Enhanced Notes enabled in the Salesforce Org. 
-2. MyDomain is enabled for the Org.
+2. MyDomain is deployed.
 
 
 Installation
