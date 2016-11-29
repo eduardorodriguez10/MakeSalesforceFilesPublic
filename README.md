@@ -1,4 +1,4 @@
-Automatically Share (publicly) Salesforce Files in Lightning Experience
+Automatically Share (publicly) Salesforce Files - includes lightning component for sharing management
 ====================================
 
 This application can be used to automatically share (publicly) Salesforce Files in Lightning Experience. It makes the file publicly accessible through a URL and uses a lightning component to manage the sharing of the file.
