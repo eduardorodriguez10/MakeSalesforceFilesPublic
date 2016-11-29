@@ -9,7 +9,7 @@ How it works
 1. A Shared_Files_Setting__mdt metadata type is used to indicate what attachments should be publicly shared. It contains an SObjectName__c field that is used to indicate the name of the SObjects that have attachments that need to be shared. For instance, a Shared_Files_Setting__mdt record with the SObjectName__C of 'Contact' means that all attachments for contacts should be publicly shared.
 2. For each attachment that should be shared, the app creates a Shared_File__c record. The Shared_File__c record contants the record Id of the related record (stored in the RelatedRecordId__c) and a checkbox called Shared_In_Public_Site__c which indicates if the file should be shared or not. 
 3. The Shared_Files_Setting__mdt custom metadata record has a Automatically_Share__c checkbox field that defines the value of the Shared_In_Public_Site__c field of the Shared_File__c record on creation. The user has the option to change the value of the Shared_In_Public_Site__c setting using the Shared column of the Linghtning Component. 
-3. When the Shared_File__c are created, a trigger checks if the Shared_In_Public_Site__c is set to true and if so it creates a ContentDistribution and copies the URL to the Download_Link__c field of the Shared_File__c record.
+3. When the Shared_File__c records are created or updated, a trigger checks if the Shared_In_Public_Site__c is set to true and if so it creates a ContentDistribution and copies the URL to the Download_Link__c field of the Shared_File__c record.
 4. A Lightning Component is used to update these settings, remove sharing, update descriptions, etc. 
 
 Dependencies
