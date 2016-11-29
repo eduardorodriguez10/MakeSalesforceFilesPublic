@@ -51,6 +51,6 @@ Security
 Credits
 -------
 
-As mentioned above, this app uses some classes from https://github.com/DouglasCAyers/sfdc-convert-attachments-to-chatter-files from Douglas C Ayers to convert Attachments to Salesforce Files, which simplifies the Unit Testing
+As mentioned above, this app uses the following classes from https://github.com/DouglasCAyers/sfdc-convert-attachments-to-chatter-files from Douglas C Ayers: ConvertAttachmentsToFilesEmailService, ConvertAttachmentsToFilesOptions, ConvertAttachmentsToFilesService, ConvertAttachmentsToFilesServiceTest. These classes are used to convert Attachments to Salesforce Files during Unit Testing. 
 
 
