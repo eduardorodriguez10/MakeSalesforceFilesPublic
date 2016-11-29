@@ -1,4 +1,4 @@
-Automatically Share Salesforce Files and make them publicly available
+Automatically Share Salesforce Files and make them publicly available (Lightning Experience)
 ====================================
 
 This application can be used to automatically share Salesforce Files that are related to records. It creates a content distribution record to make the file publicly available using an URL. 
@@ -16,6 +16,12 @@ Dependencies
 
 1. The application uses some classes from https://github.com/DouglasCAyers/sfdc-convert-attachments-to-chatter-files from Douglas C Ayers to convert Attachments to Salesforce Files, which simplifies the Unit Testing. These classes requires Enhanced Notes enabled in the Salesforce Org. 
 2. MyDomain is enabled for the Org.
+
+
+Installation
+-------------
+1. Confirm Enhanced Notes are enabled, Lightning Experience is enabled and MyDomain has been configured. 
+2. Deploy from github. 
 
 Configuration
 -------------
