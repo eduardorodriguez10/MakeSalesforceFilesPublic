@@ -98,4 +98,31 @@ public class SharedFilesTest {
             System.assertEquals(cv.Description, 'Test description');
         }
     }
+    
+    @isTest static void should_return_shared_files_in_aura()
+    {
+        List<Account> vendor = DataFactory.createAccounts(1); 
+        List<Contact> theContact = DataFactory.createContacts(1, vendor[0].Id);
+        Map<Id,Contact> contacsMap = new Map<Id,Contact>(theContact);
+        DataFactory.createFiles(1, contacsMap.keySet());
+        List<Shared_File__c> sharedFiles = SharedFilesAuraController.returnRelatedSharedFiles(theContact[0].Id);
+        System.assertNotEquals(0, sharedFiles.size()); 
+    }
+    
+    @isTest static void should_update_shared_files_in_aura()
+    {
+        List<Account> vendor = DataFactory.createAccounts(1); 
+        List<Contact> theContact = DataFactory.createContacts(1, vendor[0].Id);
+        Map<Id,Contact> contacsMap = new Map<Id,Contact>(theContact);
+        DataFactory.createFiles(1, contacsMap.keySet());
+        List<Shared_File__c> sharedFiles = SharedFilesAuraController.returnRelatedSharedFiles(theContact[0].Id);
+        sharedFiles[0].Description__c = 'Updated by Test'; 
+        Test.startTest();
+            List<Shared_File__c> newSharedFiles =  SharedFilesAuraController.updatedSharedFiles(sharedFiles, theContact[0].Id);
+        Test.stopTest();
+        
+        Map<Id,Shared_File__c> mapSharedFiles = new Map<Id,Shared_File__c>(newSharedFiles); 
+        Shared_File__c updatedSharedFile = mapSharedFiles.get(sharedFiles[0].Id);
+        System.assertEquals(updatedSharedFile.Description__c, 'Updated by Test'); 
+    }
 }
